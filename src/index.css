@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  body:not(.touch-device) {
+    cursor: none;
+  }
+  
+  body:not(.touch-device) a, 
+  body:not(.touch-device) button, 
+  body:not(.touch-device) [role="button"], 
+  body:not(.touch-device) input, 
+  body:not(.touch-device) select, 
+  body:not(.touch-device) textarea, 
+  body:not(.touch-device) label[for] {
+    cursor: none !important;
+  }
+}
+
+/* Ensure touch devices always show cursor */
+@media (hover: none) or (pointer: coarse) {
+  body, a, button, [role="button"], input, select, textarea, label[for] {
+    cursor: auto !important;
+  }
+}
+
+@layer base {
+  :root {
+    /* YuDru Design System - Dark Tech Aerospace Theme */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 192 95% 55%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 192 95% 55%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 20%;
+    --ring: 192 95% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --navy-deep: 222 47% 6%;
+    --navy-dark: 222 47% 8%;
+    --navy-medium: 222 40% 12%;
+    --steel-grey: 220 15% 25%;
+    --carbon-grey: 220 10% 35%;
+    --cyan-electric: 192 95% 55%;
+    --cyan-glow: 192 100% 65%;
+    --cyan-muted: 192 60% 40%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 6%) 0%, hsl(222 47% 12%) 50%, hsl(222 47% 8%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%) 0%, hsl(222 47% 7%) 100%);
+    --gradient-glow: linear-gradient(90deg, hsl(192 95% 55% / 0) 0%, hsl(192 95% 55% / 0.3) 50%, hsl(192 95% 55% / 0) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(192 95% 55%) 0%, hsl(192 80% 45%) 100%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(192 95% 55% / 0.15);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.4);
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 192 95% 55%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 192 95% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    @apply leading-tight;
+  }
+
+  /* Better touch targets on mobile */
+  @media (max-width: 768px) {
+    button, a, [role="button"] {
+      min-height: 44px;
+    }
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glass-panel {
+    @apply bg-secondary/30 backdrop-blur-md border border-border/30;
+  }
+
+  .glow-line {
+    background: var(--gradient-glow);
+    height: 1px;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--cyan-glow)) 100%);
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .grid-pattern {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .tech-dots {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+}
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+}
+
+/* Scroll to Top Button Animations - Futuristic Drone Style */
+
+/* Chevron lift animation - simulates drone takeoff motion */
+@keyframes scroll-btn-lift {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-6px);
+    opacity: 0.4;
+  }
+  85% {
+    transform: translateY(2px);
+    opacity: 0;
+  }
+  95% {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+}
+
+/* Pulse glow effect for neon edge */
+@keyframes scroll-btn-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+/* Energy line animation */
+@keyframes scroll-btn-energy {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.animate-scroll-btn-lift {
+  animation: scroll-btn-lift 3s ease-in-out infinite;
+}
+
+.animate-scroll-btn-pulse {
+  animation: scroll-btn-pulse 2.5s ease-in-out infinite;
+}
+
+.animate-scroll-btn-energy {
+  animation: scroll-btn-energy 4s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* Radial gradient utility for hover glow */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-btn-lift,
+  .animate-scroll-btn-pulse,
+  .animate-scroll-btn-energy {
+    animation: none;
+  }
+}
