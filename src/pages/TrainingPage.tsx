@@ -4,49 +4,61 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, GraduationCap, Wrench, Shield, Clock, Users, Award } from "lucide-react";
+import { ArrowRight, GraduationCap, Shield, Clock, Users, Award, School, Building2 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
 
 const trainingPrograms = [
   {
-    title: "Drone Pilot Training",
-    duration: "8 Weeks",
-    level: "Beginner to Advanced",
-    description: "Comprehensive pilot certification covering flight operations, safety protocols, and regulatory compliance.",
-    features: ["Flight simulation training", "Hands-on flying sessions", "Safety certification", "Regulatory compliance"],
+    title: "School-Level Drone Training",
+    duration: "2 Days",
+    level: "Foundational",
+    icon: School,
+    description: "A foundational drone training program designed for school students, introducing them to UAV technology through hands-on learning.",
+    features: [
+      "Introduction to drones and UAV systems",
+      "Basics of flight, safety, and regulations",
+      "Hands-on drone assembly and flying",
+      "STEM-focused practical learning",
+    ],
+    cta: { primary: "Enroll Your School", secondary: "Contact for Scheduling" },
   },
   {
-    title: "Industrial Operations",
-    duration: "6 Weeks",
-    level: "Intermediate",
-    description: "Specialized training for industrial monitoring, surveying, and commercial drone operations.",
-    features: ["Monitoring operations", "Data collection", "Equipment maintenance", "Mission planning"],
-  },
-  {
-    title: "Advanced Professional",
-    duration: "12 Weeks",
+    title: "College & Institutional Training",
+    duration: "3 Days",
     level: "Advanced",
-    description: "Advanced drone operations for enterprise and research professionals.",
-    features: ["Complex operations", "Night operations", "Secure communications", "Mission execution"],
+    icon: GraduationCap,
+    description: "Advanced training program designed for engineering students and technical institutions, covering aerodynamics through to flight testing.",
+    features: [
+      "Drone aerodynamics and propulsion systems",
+      "Electronics, flight controllers, and sensors",
+      "FPV systems and communication",
+      "Drone assembly, configuration, and flight testing",
+      "Industry applications and career pathways",
+    ],
+    cta: { primary: "Partner With Us", secondary: "View Training Curriculum" },
+  },
+  {
+    title: "Defence & Industry Training",
+    duration: "Custom",
+    level: "Professional",
+    icon: Shield,
+    description: "Specialized training programs designed for operational and professional drone usage by defence personnel, security agencies, and industry professionals.",
+    features: [
+      "Advanced drone operations",
+      "Surveillance and mission planning",
+      "Payload integration",
+      "Maintenance, safety, and troubleshooting",
+      "Application-specific training modules",
+    ],
+    cta: { primary: "Request Professional Training", secondary: "Discuss Operational Requirements" },
   },
 ];
 
-const workshops = [
-  {
-    icon: Wrench,
-    title: "Drone Assembly",
-    description: "Build drones from scratch - frame assembly, motor mounting, and wiring.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Flight Controllers",
-    description: "Programming and tuning flight controllers for optimal performance.",
-  },
-  {
-    icon: Shield,
-    title: "Battery Technology",
-    description: "Battery handling, maintenance, and safety best practices.",
-  },
+const targetAudience = [
+  { label: "School Students", icon: School },
+  { label: "Engineering Colleges", icon: GraduationCap },
+  { label: "Defence Personnel", icon: Shield },
+  { label: "Industry Professionals", icon: Building2 },
 ];
 
 const TrainingPage = () => {
@@ -54,15 +66,15 @@ const TrainingPage = () => {
     <>
       <Helmet>
         <title>Training & Workshops - Drone Education | YuDru</title>
-        <meta 
-          name="description" 
-          content="Professional drone pilot training, industrial operations courses, and hands-on workshops. Get certified with YuDru's comprehensive drone education programs." 
+        <meta
+          name="description"
+          content="YuDru offers drone training programs for schools, colleges, defence, and industry — from 2-day workshops to specialized professional courses. Hands-on UAV education."
         />
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Navbar />
-        
+
         <main className="pt-24">
           {/* Hero */}
           <section className="py-16 md:py-24 relative overflow-hidden">
@@ -82,8 +94,7 @@ const TrainingPage = () => {
                     Master <span className="text-gradient">Drone Technology</span>
                   </h1>
                   <p className="text-lg text-muted-foreground mb-8">
-                    From beginner pilots to advanced operators, our comprehensive training programs 
-                    and hands-on workshops prepare you for the future of drone technology.
+                    From school-level introductions to advanced defence training, our programs deliver hands-on UAV education tailored to every skill level and industry need.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Button variant="hero" size="lg" asChild>
@@ -93,7 +104,7 @@ const TrainingPage = () => {
                       </Link>
                     </Button>
                     <Button variant="heroOutline" size="lg" asChild>
-                      <a href="#workshops">View Workshops</a>
+                      <a href="#programs">View Programs</a>
                     </Button>
                   </div>
                 </motion.div>
@@ -105,11 +116,7 @@ const TrainingPage = () => {
                   className="relative"
                 >
                   <div className="rounded-2xl overflow-hidden">
-                    <img
-                      src={trainingSession}
-                      alt="Drone Training Session"
-                      className="w-full aspect-[4/3] object-cover"
-                    />
+                    <img src={trainingSession} alt="Drone Training Session" className="w-full aspect-[4/3] object-cover" />
                   </div>
                   <div className="absolute -inset-4 bg-primary/15 rounded-3xl blur-3xl -z-10" />
                 </motion.div>
@@ -117,28 +124,23 @@ const TrainingPage = () => {
             </div>
           </section>
 
-          {/* Stats */}
+          {/* Target Audience */}
           <section className="py-12 bg-card border-y border-border/50">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {[
-                  { value: "500+", label: "Certified Pilots" },
-                  { value: "50+", label: "Training Batches" },
-                  { value: "95%", label: "Placement Rate" },
-                  { value: "15+", label: "Corporate Partners" },
-                ].map((stat, index) => (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {targetAudience.map((item, index) => (
                   <motion.div
-                    key={stat.label}
+                    key={item.label}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="text-center"
+                    className="flex flex-col items-center gap-3 text-center"
                   >
-                    <div className="font-display text-3xl md:text-4xl font-bold text-gradient mb-2">
-                      {stat.value}
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-cyan-glow flex items-center justify-center">
+                      <item.icon className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <span className="text-sm font-medium text-foreground">{item.label}</span>
                   </motion.div>
                 ))}
               </div>
@@ -146,7 +148,7 @@ const TrainingPage = () => {
           </section>
 
           {/* Training Programs */}
-          <section className="py-24">
+          <section id="programs" className="py-24">
             <div className="container mx-auto px-4 md:px-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -158,7 +160,7 @@ const TrainingPage = () => {
                   Training Programs
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Structured learning paths designed for various skill levels and career goals.
+                  Structured programs designed for schools, colleges, defence personnel, and industry professionals.
                 </p>
               </motion.div>
 
@@ -170,74 +172,46 @@ const TrainingPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="glass-card p-8 hover-glow group"
+                    className="glass-card p-8 hover-glow group flex flex-col"
                   >
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="w-4 h-4" />
-                        {program.duration}
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                        <program.icon className="w-6 h-6 text-primary" />
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Award className="w-4 h-4" />
-                        {program.level}
+                      <div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="w-3.5 h-3.5" />
+                          {program.duration}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Award className="w-3.5 h-3.5" />
+                          {program.level}
+                        </div>
                       </div>
                     </div>
-                    
-                    <h3 className="font-display text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+
+                    <h3 className="font-display text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
                       {program.title}
                     </h3>
                     <p className="text-muted-foreground mb-6">{program.description}</p>
-                    
-                    <ul className="space-y-2 mb-8">
+
+                    <ul className="space-y-2 mb-8 flex-1">
                       {program.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-3 text-sm">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        <li key={feature} className="flex items-start gap-3 text-sm">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
                     </ul>
 
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link to="/contact">Learn More</Link>
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Workshops */}
-          <section id="workshops" className="py-24 bg-card">
-            <div className="container mx-auto px-4 md:px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-16"
-              >
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Hands-on Workshops
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Practical sessions focused on building, maintaining, and optimizing drone systems.
-                </p>
-              </motion.div>
-
-              <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                {workshops.map((workshop, index) => (
-                  <motion.div
-                    key={workshop.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="glass-card p-8 text-center hover-glow group"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-cyan-glow flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <workshop.icon className="w-8 h-8 text-primary-foreground" />
+                    <div className="flex flex-col gap-2">
+                      <Button variant="hero" className="w-full" asChild>
+                        <Link to="/contact">{program.cta.primary}</Link>
+                      </Button>
+                      <Button variant="heroOutline" className="w-full" asChild>
+                        <Link to="/contact">{program.cta.secondary}</Link>
+                      </Button>
                     </div>
-                    <h3 className="font-display text-xl font-semibold mb-3">{workshop.title}</h3>
-                    <p className="text-muted-foreground">{workshop.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -255,14 +229,14 @@ const TrainingPage = () => {
               >
                 <Users className="w-12 h-12 text-primary mx-auto mb-6" />
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Start Your Journey
+                  Start Your Drone Journey
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Join hundreds of trained professionals and start your career in drone technology today.
+                  Whether you're a student, educator, or professional — our training programs are designed to equip you with real-world drone skills.
                 </p>
                 <Button variant="hero" size="xl" asChild>
                   <Link to="/contact">
-                    Get Course Details
+                    Contact Our Training Team
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                 </Button>
@@ -270,7 +244,7 @@ const TrainingPage = () => {
             </div>
           </section>
         </main>
-        
+
         <Footer />
       </div>
     </>
